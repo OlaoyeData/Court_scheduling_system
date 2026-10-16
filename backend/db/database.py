@@ -1,19 +1,23 @@
-
-
 from sqlalchemy         import create_engine
+from sqlalchemy.pool    import NullPool
 from sqlalchemy.orm     import sessionmaker, declarative_base
 from core.config        import settings
 
 
+def _normalize(url: str) -> str:
+    for prefix in ("postgresql+psycopg://", "postgresql+psycopg2://", "postgres://", "postgresql://"):
+        if url.startswith(prefix):
+            return "postgresql+psycopg2://" + url[len(prefix):]
+    return url
+
+
 engine = create_engine(
-    settings.DATABASE_URL,
-    pool_pre_ping=True,      
-    pool_size=10,
-    max_overflow=20,
+    _normalize(settings.DATABASE_URL),
+    poolclass=NullPool,   # Supabase's pooler handles pooling; serverless functions shouldn't hold their own
+    pool_pre_ping=True,
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
 Base = declarative_base()
 
 
