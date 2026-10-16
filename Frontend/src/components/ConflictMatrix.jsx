@@ -1,4 +1,5 @@
 import { Badge } from './StatusBadge.jsx'
+import { ChartNoAxesColumn } from 'lucide-react'
 
 export default function ConflictMatrix({ hearings, weekStart }) {
   const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
@@ -42,7 +43,7 @@ export default function ConflictMatrix({ hearings, weekStart }) {
   return (
     <div className="card" style={{ padding: '1.5rem', overflowX: 'auto' }}>
       <h3 style={{ marginBottom: '1.25rem', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <span>📊</span> Conflict Visualization Matrix
+        <ChartNoAxesColumn size={18} aria-hidden="true" /> Conflict Visualization Matrix
       </h3>
       <div style={{ display: 'grid', gridTemplateColumns: '80px repeat(5, 1fr)', border: '1px solid var(--border)' }}>
         <div style={{ background: 'var(--bg-accent)', borderBottom: '2px solid var(--border)', padding: '0.75rem' }} />

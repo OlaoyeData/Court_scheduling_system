@@ -10,6 +10,7 @@ import ConfirmDialog from '../components/ConfirmDialog.jsx'
 import { Badge, PriorityDot } from '../components/StatusBadge.jsx'
 import { toast } from '../components/Toast.jsx'
 import { useHistory, useKeyboardShortcuts } from '../hooks/useUX.js'
+import { Star, Scale } from 'lucide-react'
 
 const CASE_TYPES = ['criminal','civil','family','commercial','land','constitutional']
 const STATUSES   = ['pending','scheduled','heard','adjourned']
@@ -173,7 +174,7 @@ export default function Cases() {
         </div>
         <div style={{ display: 'flex', gap: '0.75rem' }}>
           <button className={`btn ${showOnlyFavs ? 'btn-primary' : 'btn-secondary'}`} onClick={() => setShowOnlyFavs(!showOnlyFavs)}>
-            {showOnlyFavs ? '⭐ Favorites Only' : '☆ All Cases'}
+            {showOnlyFavs ? <><Star size={14} fill="currentColor" /> Favorites Only</> : <><Star size={14} /> All Cases</>}
           </button>
           <button className="btn btn-primary" onClick={openAdd}>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
@@ -240,7 +241,7 @@ export default function Cases() {
               {loading ? Array(5).fill(0).map((_, i) => (
                 <tr key={i}><td colSpan={12}><div className="skeleton" style={{ height: '1rem' }} /></td></tr>
               )) : filtered.length === 0 ? (
-                <tr><td colSpan={12}><div className="table-empty"><div className="table-empty-icon">⚖️</div><p>No cases found.</p></div></td></tr>
+                <tr><td colSpan={12}><div className="table-empty"><div className="table-empty-icon"><Scale /></div><p>No cases found.</p></div></td></tr>
               ) : filtered.slice(0, limit).map(c => (
                 <tr key={c.id} style={{ background: selectedIds.includes(c.id) ? 'var(--bg-accent)' : 'transparent' }}>
                   <td><input type="checkbox" checked={selectedIds.includes(c.id)} onChange={() => toggleSelect(c.id)} /></td>
@@ -250,7 +251,7 @@ export default function Cases() {
                       style={{ background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: favorites.includes(c.id) ? 'var(--amber)' : 'var(--text-muted)' }}
                       title={favorites.includes(c.id) ? 'Remove from favorites' : 'Add to favorites'}
                     >
-                      {favorites.includes(c.id) ? '★' : '☆'}
+                      <Star size={16} fill={favorites.includes(c.id) ? 'currentColor' : 'none'} />
                     </button>
                   </td>
                   <td><span style={{ fontFamily: 'monospace', fontSize: '0.82rem', fontWeight: 600, color: 'var(--navy)' }}>{c.case_number}</span></td>

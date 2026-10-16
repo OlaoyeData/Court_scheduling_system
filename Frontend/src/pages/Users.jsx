@@ -5,6 +5,7 @@ import { toast } from '../components/Toast.jsx'
 import Modal from '../components/Modal.jsx'
 import { Badge } from '../components/StatusBadge.jsx'
 import { useQuery, useMutation } from '../hooks/useQuery.js'
+import { KeyRound, Trash2 } from 'lucide-react'
 
 export default function Users() {
   const { data: users, loading, invalidate, mutate } = useQuery('/users')
@@ -100,10 +101,10 @@ export default function Users() {
                   <td style={{ textAlign: 'right' }}>
                     <div className="table-actions" style={{ justifyContent: 'flex-end' }}>
                       <button className="btn btn-icon" title="Reset Password" onClick={() => toast(`Password reset link sent to ${u.email}`, 'info')}>
-                        🔑
+                        <KeyRound size={16} />
                       </button>
                       <button className="btn btn-icon" onClick={() => handleDelete(u.id)} style={{ color: 'var(--criminal)' }}>
-                        🗑
+                        <Trash2 size={16} />
                       </button>
                     </div>
                   </td>

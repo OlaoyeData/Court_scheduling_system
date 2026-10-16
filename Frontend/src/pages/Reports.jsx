@@ -4,6 +4,7 @@ import client from '../api/client.js'
 import { toast } from '../components/Toast.jsx'
 import { Badge } from '../components/StatusBadge.jsx'
 import { useQuery } from '../hooks/useQuery.js'
+import { Mail, Save, ChartNoAxesColumn, UserRound, Landmark } from 'lucide-react'
 
 export default function Reports() {
   const { data, loading, error } = useQuery('/analytics/reports')
@@ -87,10 +88,10 @@ export default function Reports() {
         </div>
         <div style={{ display: 'flex', gap: '0.75rem' }}>
           <button className="btn btn-secondary" onClick={handleEmailStakeholders} disabled={isEmailing}>
-            {isEmailing ? <span className="spinner" style={{ width: '1rem', height: '1rem' }} /> : '📧 Email Stakeholders'}
+            {isEmailing ? <span className="spinner" style={{ width: '1rem', height: '1rem' }} /> : <><Mail size={16} /> Email Stakeholders</>}
           </button>
           <button className="btn btn-primary" onClick={handleExport}>
-            💾 Export {reportConfig.format.toUpperCase()}
+            <Save size={16} /> Export {reportConfig.format.toUpperCase()}
           </button>
         </div>
       </div>
@@ -100,7 +101,7 @@ export default function Reports() {
         {/* Case Distribution */}
         <div className="card" style={{ padding: '1.5rem' }}>
           <h3 style={{ marginBottom: '1.5rem', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span>📊</span> Case Distribution by Type
+            <ChartNoAxesColumn size={18} /> Case Distribution by Type
           </h3>
           <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
             <div style={{ position: 'relative', width: '120px', height: '120px', borderRadius: '50%', background: 'conic-gradient(var(--criminal) 0% 37.5%, var(--civil) 37.5% 64.2%, var(--family) 64.2% 79.2%, var(--commercial) 79.2% 100%)' }} />
@@ -119,7 +120,7 @@ export default function Reports() {
         {/* Judge Workload */}
         <div className="card" style={{ padding: '1.5rem' }}>
           <h3 style={{ marginBottom: '1.25rem', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span>👨‍⚖️</span> Judge Workload Analytics
+            <UserRound size={18} /> Judge Workload Analytics
           </h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {(data.judge_workload || []).map(j => (
@@ -139,7 +140,7 @@ export default function Reports() {
         {/* Courtroom Utilization */}
         <div className="card" style={{ padding: '1.5rem' }}>
           <h3 style={{ marginBottom: '1.25rem', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span>🏛</span> Courtroom Utilization
+            <Landmark size={18} /> Courtroom Utilization
           </h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
             {(data.utilization || []).map(u => (

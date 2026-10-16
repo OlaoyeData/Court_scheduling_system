@@ -3,6 +3,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react'
 import client from '../api/client.js'
 import { toast } from '../components/Toast.jsx'
 import { Badge } from '../components/StatusBadge.jsx'
+import { Landmark, UserRound } from 'lucide-react'
 
 const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday']
 const HOURS = Array.from({ length: 9 }, (_, i) => i + 9) // 9 AM to 5 PM
@@ -273,7 +274,7 @@ function DailyView({ hearings }) {
                  </div>
                  <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{h.title}</div>
                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>
-                    🏛 {h.courtroom_name} · 👨‍⚖️ {h.judge_name}
+                    <Landmark size={14} aria-hidden="true" /> {h.courtroom_name} · <UserRound size={14} aria-hidden="true" /> {h.judge_name}
                  </div>
               </div>
               <button className="btn btn-secondary btn-sm">View Details</button>

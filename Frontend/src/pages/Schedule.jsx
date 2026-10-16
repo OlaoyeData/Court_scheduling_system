@@ -6,6 +6,7 @@ import ConflictMatrix from '../components/ConflictMatrix.jsx'
 import { Badge, PriorityDot } from '../components/StatusBadge.jsx'
 import { toast } from '../components/Toast.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
+import { CalendarDays, TriangleAlert } from 'lucide-react'
 
 function getNextMonday() {
   const d = new Date()
@@ -158,7 +159,7 @@ export default function Schedule() {
               {/* Week picker */}
               <div className="card" style={{ padding: '1.25rem 1.5rem' }}>
                 <h3 style={{ marginBottom: '1rem', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <span>📅</span> Target Scheduling Week
+                  <CalendarDays size={16} /> Target Scheduling Week
                 </h3>
                 <div className="form-group">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -310,13 +311,13 @@ export default function Schedule() {
                     </div>
                   ) : (
                     <div className="info-box info-box-red" style={{ flex: 1 }}>
-                      <span style={{ fontWeight: 700 }}>⚠</span>
+                      <TriangleAlert size={15} />
                       <span><strong>{result.conflict_count}</strong> conflicts detected!</span>
                     </div>
                   )}
                   {result.unscheduled_count > 0 && (
                     <div className="info-box info-box-amber" style={{ flex: 1 }}>
-                      <span style={{ fontWeight: 700 }}>⚠</span>
+                      <TriangleAlert size={15} />
                       <span><strong>{result.unscheduled_count}</strong> cases unscheduled</span>
                     </div>
                   )}
@@ -372,7 +373,7 @@ export default function Schedule() {
             )}
             {!result && !loading && (
               <div className="card" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-                <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>📅</div>
+                <CalendarDays size={40} style={{ marginBottom: '1rem' }} />
                 <p>Select cases and click <strong>Generate Schedule</strong> to create this week's hearing timetable.</p>
               </div>
             )}

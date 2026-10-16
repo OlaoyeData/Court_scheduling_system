@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { usePreferences } from '../context/PreferencesContext.jsx'
 import { useQuery } from '../hooks/useQuery.js'
-import { Scale, Clock, CalendarCheck, ListOrdered, BarChart2 } from 'lucide-react'
+import { Scale, Clock, CalendarCheck, ListOrdered, BarChart2, Settings2 } from 'lucide-react'
 
 const STAT_CONFIG = [
   { key: 'total_cases',         label: 'Total Cases',         Icon: Scale,         link: '/cases',               color: 'var(--navy)',           size: 'small' },
@@ -52,7 +52,7 @@ export default function Dashboard() {
           <p className="page-header-sub">System overview — {new Date().toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
         </div>
         <button className={`btn ${isCustomizing ? 'btn-primary' : 'btn-secondary'}`} onClick={() => setIsCustomizing(!isCustomizing)}>
-          {isCustomizing ? 'Finish Customizing' : '⚙ Customize Dashboard'}
+          {isCustomizing ? 'Finish Customizing' : <><Settings2 size={16} /> Customize Dashboard</>}
         </button>
       </div>
 

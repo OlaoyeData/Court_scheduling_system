@@ -32,7 +32,7 @@ def init():
                         password="Admin@1234",
                         role="superadmin")
             print("Default admin created  →  username: admin | password: Admin@1234")
-            print("⚠  Change this password immediately after first login!")
+            print("WARNING: Change this password immediately after first login!")
         else:
             print("Admin user already exists, skipping.")
 

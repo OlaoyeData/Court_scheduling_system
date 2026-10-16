@@ -4,6 +4,7 @@ import client from '../api/client.js'
 import { toast } from '../components/Toast.jsx'
 import { Badge } from '../components/StatusBadge.jsx'
 import { useQuery } from '../hooks/useQuery.js'
+import { Settings2, Bell, CalendarDays, ScrollText, Wrench, Trash2, Save, RefreshCw, Info } from 'lucide-react'
 
 const isDemo = import.meta.env.VITE_DEMO_MODE === 'true'
 
@@ -59,11 +60,11 @@ export default function Settings() {
         {/* Sidebar Tabs */}
         <div className="card" style={{ padding: '0.5rem' }}>
           {[
-            { id: 'general', label: 'General Settings', icon: '⚙️' },
-            { id: 'notifications', label: 'Notifications', icon: '🔔' },
-            { id: 'holidays', label: 'Court Holidays', icon: '📅' },
-            { id: 'audit', label: 'Audit Trail', icon: '📜' },
-            { id: 'maintenance', label: 'Maintenance', icon: '🛠️' }
+            { id: 'general', label: 'General Settings', icon: Settings2 },
+            { id: 'notifications', label: 'Notifications', icon: Bell },
+            { id: 'holidays', label: 'Court Holidays', icon: CalendarDays },
+            { id: 'audit', label: 'Audit Trail', icon: ScrollText },
+            { id: 'maintenance', label: 'Maintenance', icon: Wrench }
           ].map(t => (
             <button
               key={t.id}
@@ -78,7 +79,7 @@ export default function Settings() {
               }}
               aria-pressed={tab === t.id}
             >
-              <span>{t.icon}</span>
+              <t.icon size={16} aria-hidden="true" />
               {t.label}
             </button>
           ))}
@@ -124,7 +125,7 @@ export default function Settings() {
               <h3 style={{ marginBottom: '1.5rem' }}>Notification Settings</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <div className="info-box info-box-amber">
-                  <span>ℹ</span> Notification services require active API keys for Twilio and SendGrid.
+                  <Info size={16} aria-hidden="true" /> Notification services require active API keys for Twilio and SendGrid.
                 </div>
                 <label className="checkbox-pill" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', cursor: 'pointer' }}>
                   <input type="checkbox" defaultChecked /> Enable Email Notifications (SendGrid)
@@ -166,7 +167,7 @@ export default function Settings() {
                         <td>{new Date(h.date).toLocaleDateString('en-GB', { dateStyle: 'long' })}</td>
                         <td><Badge value="Active" /></td>
                         <td style={{ textAlign: 'right' }}>
-                          <button className="btn btn-icon" style={{ color: 'var(--criminal)' }}>🗑</button>
+                          <button className="btn btn-icon" style={{ color: 'var(--criminal)' }}><Trash2 size={16} /></button>
                         </td>
                       </tr>
                     ))}
@@ -213,13 +214,13 @@ export default function Settings() {
               <h3 style={{ marginBottom: '1.5rem' }}>System Maintenance</h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
                 <div style={{ padding: '1.5rem', background: 'var(--bg-accent)', borderRadius: '8px', border: '1px solid var(--border)' }}>
-                  <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>💾</div>
+                  <Save size={24} style={{ marginBottom: '0.5rem' }} />
                   <h4 style={{ marginBottom: '0.5rem' }}>Database Backup</h4>
                   <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>Snapshot current state to secure storage.</p>
                   <button className="btn btn-secondary" onClick={handleBackup}>Run Backup Now</button>
                 </div>
                 <div style={{ padding: '1.5rem', background: 'var(--bg-accent)', borderRadius: '8px', border: '1px solid var(--border)' }}>
-                  <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🔄</div>
+                  <RefreshCw size={24} style={{ marginBottom: '0.5rem' }} />
                   <h4 style={{ marginBottom: '0.5rem' }}>System Restore</h4>
                   <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>Restore from a previous snapshot.</p>
                   <button className="btn btn-secondary" disabled title="Requires super-admin privileges">Restore System</button>

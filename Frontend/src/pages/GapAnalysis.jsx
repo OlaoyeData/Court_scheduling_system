@@ -3,6 +3,7 @@ import { useState, useMemo } from 'react'
 import { useQuery } from '../hooks/useQuery.js'
 import { Badge } from '../components/StatusBadge.jsx'
 import { toast } from '../components/Toast.jsx'
+import { ChartNoAxesColumn, FileText, Scale, Landmark, Brain, UserRound, Lightbulb, TriangleAlert } from 'lucide-react'
 
 const MOCK_FALLBACK = {
   judge_gaps: [
@@ -122,15 +123,15 @@ export default function GapAnalysis() {
       <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
           <h1 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span style={{ fontSize: '1.8rem' }}>📊</span> Resource Gap Analysis
+            <ChartNoAxesColumn size={29} aria-hidden="true" /> Resource Gap Analysis
           </h1>
           <p className="page-header-sub">
             Identify mismatches between court workloads, judge availability, and courtroom capacities.
           </p>
         </div>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
-          <button className="btn btn-secondary" onClick={() => handleExport('PDF')}>📄 Export PDF</button>
-          <button className="btn btn-secondary" onClick={() => handleExport('CSV')}>📊 Export CSV</button>
+          <button className="btn btn-secondary" onClick={() => handleExport('PDF')}><FileText size={16} /> Export PDF</button>
+          <button className="btn btn-secondary" onClick={() => handleExport('CSV')}><ChartNoAxesColumn size={16} /> Export CSV</button>
         </div>
       </div>
 
@@ -196,10 +197,10 @@ export default function GapAnalysis() {
       {/* Tabs */}
       <div style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--border)', paddingBottom: '1px' }}>
         {[
-          { id: 'overview', label: 'Overview & Visualizations', icon: '📊' },
-          { id: 'judges', label: 'Judge Gaps', icon: '👨‍⚖️' },
-          { id: 'courtrooms', label: 'Courtroom Gaps', icon: '🏛' },
-          { id: 'recommendations', label: 'Smart Recommendations', icon: '🧠' }
+          { id: 'overview', label: 'Overview & Visualizations', icon: ChartNoAxesColumn },
+          { id: 'judges', label: 'Judge Gaps', icon: UserRound },
+          { id: 'courtrooms', label: 'Courtroom Gaps', icon: Landmark },
+          { id: 'recommendations', label: 'Smart Recommendations', icon: Brain }
         ].map(tab => (
           <button
             key={tab.id}
@@ -219,7 +220,7 @@ export default function GapAnalysis() {
               transition: 'all 120ms'
             }}
           >
-            <span>{tab.icon}</span> {tab.label}
+            <tab.icon size={16} aria-hidden="true" /> {tab.label}
           </button>
         ))}
       </div>
@@ -273,7 +274,7 @@ export default function GapAnalysis() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', flexWrap: 'wrap' }}>
                 {/* Judge Distribution Bar Graph */}
                 <div className="card" style={{ padding: '1.5rem' }}>
-                  <h3 style={{ fontSize: '1.1rem', marginBottom: '1.2rem', color: 'var(--navy)' }}>👨‍⚖️ Judge Capacity & Workload Balance</h3>
+                  <h3 style={{ fontSize: '1.1rem', marginBottom: '1.2rem', color: 'var(--navy)' }}><UserRound size={18} /> Judge Capacity & Workload Balance</h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
                     {filteredData.judge_gaps.map(j => (
                       <div key={j.judge_id} style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
@@ -302,7 +303,7 @@ export default function GapAnalysis() {
 
                 {/* Heatmap */}
                 <div className="card" style={{ padding: '1.5rem' }}>
-                  <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--navy)' }}>🏛 Courtroom Occupancy Heatmap</h3>
+                  <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--navy)' }}><Landmark size={18} /> Courtroom Occupancy Heatmap</h3>
                   <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
                     Visual representation of hourly booking rates across the work week. Darker colors denote high occupancy.
                   </p>
@@ -360,7 +361,7 @@ export default function GapAnalysis() {
 
               {/* Case Type Gap Analysis */}
               <div className="card" style={{ padding: '1.5rem' }}>
-                <h3 style={{ fontSize: '1.1rem', marginBottom: '1.2rem', color: 'var(--navy)' }}>⚖️ Case Division Coverage & Gaps</h3>
+                <h3 style={{ fontSize: '1.1rem', marginBottom: '1.2rem', color: 'var(--navy)' }}><Scale size={18} /> Case Division Coverage & Gaps</h3>
                 <div className="table-wrapper">
                   <table className="data-table">
                     <thead>
@@ -382,7 +383,7 @@ export default function GapAnalysis() {
                           <td>
                             {g.gap > 0 ? (
                               <span style={{ color: 'var(--criminal)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                                ⚠️ Need {g.gap} more judge{g.gap > 1 ? 's' : ''}
+                                <TriangleAlert size={14} /> Need {g.gap} more judge{g.gap > 1 ? 's' : ''}
                               </span>
                             ) : (
                               <span style={{ color: 'var(--success)', fontWeight: 600 }}>✓ Optimal Coverage</span>
@@ -445,7 +446,7 @@ export default function GapAnalysis() {
                     color: j.status === 'overloaded' ? 'var(--criminal)' : j.status === 'underutilized' ? 'var(--text-primary)' : 'var(--success)',
                     fontWeight: 500
                   }}>
-                    💡 {j.status === 'overloaded' 
+                    <Lightbulb size={16} /> {j.status === 'overloaded'
                       ? 'Reassign 4 pending civil cases to underutilized chambers to balance queue.'
                       : j.status === 'underutilized'
                       ? 'Available to receive complex case loads or specialized land appeals.'
@@ -511,7 +512,7 @@ export default function GapAnalysis() {
           {activeTab === 'recommendations' && (
             <div className="card" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: '0.75rem' }}>
-                <h3 style={{ color: 'var(--navy)' }}>🧠 Actionable System Diagnostics & Recommendations</h3>
+                <h3 style={{ color: 'var(--navy)' }}><Brain size={18} /> Actionable System Diagnostics & Recommendations</h3>
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                   Smart suggestions generated dynamically by compiling database utilization thresholds.
                 </p>
@@ -528,7 +529,7 @@ export default function GapAnalysis() {
                   gap: '1rem',
                   alignItems: 'flex-start'
                 }}>
-                  <span style={{ fontSize: '1.3rem' }}>⚖️</span>
+                  <Scale size={21} />
                   <div>
                     <h5 style={{ margin: '0 0 0.35rem 0', fontSize: '0.9rem', color: 'var(--navy)' }}>Case Type Bottleneck: Criminal Division</h5>
                     <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.35rem' }}>
@@ -547,7 +548,7 @@ export default function GapAnalysis() {
                   gap: '1rem',
                   alignItems: 'flex-start'
                 }}>
-                  <span style={{ fontSize: '1.3rem' }}>👨‍⚖️</span>
+                  <UserRound size={21} />
                   <div>
                     <h5 style={{ margin: '0 0 0.35rem 0', fontSize: '0.9rem', color: 'var(--navy)' }}>Load Balance: Justice Ibrahim Benson</h5>
                     <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.35rem' }}>
@@ -566,7 +567,7 @@ export default function GapAnalysis() {
                   gap: '1rem',
                   alignItems: 'flex-start'
                 }}>
-                  <span style={{ fontSize: '1.3rem' }}>🏛</span>
+                  <Landmark size={21} />
                   <div>
                     <h5 style={{ margin: '0 0 0.35rem 0', fontSize: '0.9rem', color: 'var(--navy)' }}>Courtroom Utilization Balance</h5>
                     <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.35rem' }}>

@@ -5,6 +5,7 @@ import Modal from '../components/Modal.jsx'
 import ConfirmDialog from '../components/ConfirmDialog.jsx'
 import { Badge } from '../components/StatusBadge.jsx'
 import { toast } from '../components/Toast.jsx'
+import { Scale } from 'lucide-react'
 
 const SPECIALIZATIONS = ['criminal','civil','family','commercial','land','constitutional']
 const DAYS = ['monday','tuesday','wednesday','thursday','friday']
@@ -153,7 +154,7 @@ export default function Judges() {
                 <tr key={i}><td colSpan={7}><div className="skeleton" style={{ height: '1rem', margin: '0.25rem 0' }} /></td></tr>
               )) : judges.length === 0 ? (
                 <tr><td colSpan={7}>
-                  <div className="table-empty"><div className="table-empty-icon">⚖️</div><p>No judges yet. Add one to get started.</p></div>
+                  <div className="table-empty"><div className="table-empty-icon"><Scale /></div><p>No judges yet. Add one to get started.</p></div>
                 </td></tr>
               ) : judges.map(j => (
                 <tr key={j.id}>

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
 import client from '../api/client.js'
+import { TriangleAlert } from 'lucide-react'
 
 export default function Login() {
   const { login, isAuthenticated } = useAuth()
@@ -101,7 +102,7 @@ export default function Login() {
         <div className="card" style={{ padding: '2rem' }}>
           {error && (
             <div className="info-box info-box-red animate-in" style={{ marginBottom: '1.25rem' }}>
-              <span>⚠</span> {error}
+              <TriangleAlert size={16} aria-hidden="true" /> {error}
             </div>
           )}
 

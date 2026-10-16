@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import client from '../api/client.js'
 import { toast } from './Toast.jsx'
+import { TriangleAlert } from 'lucide-react'
 
 const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday']
 const CASE_TYPE_COLORS = {
@@ -258,7 +259,7 @@ export default function ScheduleGrid({ hearings, weekStart, onStatusChange }) {
                             {h.case_number}
                           </div>
                           <div style={{ display: 'flex', gap: '2px', alignItems: 'center' }}>
-                            {hasConflict && <span title="Time Conflict!" style={{ color: 'var(--criminal)', fontSize: '0.75rem', lineHeight: 1 }}>⚠</span>}
+                            {hasConflict && <TriangleAlert size={13} title="Time Conflict!" style={{ color: 'var(--criminal)', verticalAlign: 'middle' }} />}
                             {!hasConflict && h.confidence && (
                               <div title={`AI Confidence: ${Math.round(h.confidence * 100)}%`} style={{ 
                                 width: 6, height: 6, borderRadius: '50%', 

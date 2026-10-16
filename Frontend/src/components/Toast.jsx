@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { Check, X, TriangleAlert, Info } from 'lucide-react'
 
 let _addToast = null
 
@@ -24,10 +25,10 @@ export function toast(message, type = 'success') {
 }
 
 const icons = {
-  success: '✓',
-  error: '✕',
-  warning: '⚠',
-  info: 'ℹ',
+  success: Check,
+  error: X,
+  warning: TriangleAlert,
+  info: Info,
 }
 
 const typeClass = {
@@ -50,7 +51,7 @@ export function ToastContainer({ toasts }) {
           className={`info-box ${typeClass[t.type]} animate-in`}
           style={{ boxShadow: 'var(--shadow-md)', fontWeight: 500 }}
         >
-          <span style={{ fontWeight: 700, flexShrink: 0 }}>{icons[t.type]}</span>
+          {(() => { const Icon = icons[t.type] || Check; return <Icon size={18} style={{ flexShrink: 0 }} /> })()}
           <span>{t.message}</span>
         </div>
       ))}

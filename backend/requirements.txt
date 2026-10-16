@@ -10,6 +10,8 @@ sqlalchemy>=2.0.0
 psycopg2-binary>=2.9.9      
 python-jose[cryptography]>=3.3.0
 passlib[bcrypt]>=1.7.4
+# Passlib 1.7.4 is incompatible with bcrypt 5.x (backend self-test fails).
+bcrypt<4.1.0
 python-dotenv>=1.0.0
 scikit-learn>=1.4.0
 numpy>=1.26.0

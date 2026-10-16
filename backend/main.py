@@ -71,7 +71,7 @@ def _seed_initial_data():
                         full_name="System Administrator",
                         password="Admin@1234", role="superadmin")
             print("[seed] Default admin user created. Username: admin | Password: Admin@1234")
-            print("[seed] ⚠  Change the default password immediately after first login.")
+            print("[seed] WARNING: Change the default password immediately after first login.")
 
         if not get_all_judges(db):
             JUDGES = [

@@ -4,6 +4,7 @@ import { useCourtrooms } from '../hooks/useCourtrooms.js'
 import Modal from '../components/Modal.jsx'
 import ConfirmDialog from '../components/ConfirmDialog.jsx'
 import { Badge } from '../components/StatusBadge.jsx'
+import { Landmark } from 'lucide-react'
 import { toast } from '../components/Toast.jsx'
 
 const EQUIPMENT_OPTIONS = ['Video Conferencing', 'Digital Recording', 'Climate Control', 'Wheelchair Accessible', 'Projector']
@@ -140,7 +141,7 @@ export default function Courtrooms() {
                 <tr key={i}><td colSpan={7}><div className="skeleton" style={{ height: '1rem' }} /></td></tr>
               )) : rooms.length === 0 ? (
                 <tr><td colSpan={7}>
-                  <div className="table-empty"><div className="table-empty-icon">🏛</div><p>No courtrooms yet. Add one to get started.</p></div>
+                  <div className="table-empty"><div className="table-empty-icon"><Landmark /></div><p>No courtrooms yet. Add one to get started.</p></div>
                 </td></tr>
               ) : rooms.map(r => (
                 <tr key={r.id} style={{ background: selectedIds.includes(r.id) ? 'var(--bg-accent)' : 'transparent' }}>
